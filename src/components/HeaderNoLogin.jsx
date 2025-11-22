@@ -19,7 +19,7 @@ const HeaderNoLogin = () => {
     <div className="row align-items-center">
       <div className="col-12 col-md-3">
         <Link to="/" className="d-inline-block fw-bold text-dark text-decoration-none" style={{fontSize: "1.50rem"}}>
-          📖<strong>BookWala</strong>
+          📖 <strong>BookWala</strong>
         </Link>
       </div>
       <div className="col-12 col-md-6 my-2 my-md-0">

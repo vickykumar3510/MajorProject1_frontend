@@ -14,14 +14,12 @@ const Header = () => {
       <div className="container">
           <div className="row align-items-center">
 
-        {/* Logo */}
         <div className="col-12 col-md-3">
         <Link to="/" className="d-inline-block fw-bold text-dark text-decoration-none" style={{fontSize: "1.50rem"}}>
           📖 <strong>BookWala</strong>
         </Link>
         </div>
 
-        {/* Search Bar */}
         <div className="col-12 col-md-6 my-2 my-md-0">
           <input
             onChange={handleInput}
@@ -32,7 +30,6 @@ const Header = () => {
           />
         </div>
 
-        {/* Buttons */}
         <div className="col-12 col-md-3 d-flex justify-content-md-end gap-2">
           <Link to="/loginpage" className="btn btn-light btn-sm">Login</Link>
           <Link to="/wishlist" className="btn btn-light btn-sm">Wish List</Link>

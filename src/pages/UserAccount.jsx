@@ -58,7 +58,7 @@ const UserAccount = () => {
         <div className="container">
           <div className="row mt-4">
 
-            {/* LEFT: FORM */}
+     
             <div className="col-12 col-md-6 mb-4">
               <h2>Hi User!</h2>
               <p><strong>Please fill the delivery address form:</strong></p>
@@ -132,7 +132,7 @@ const UserAccount = () => {
               </form>
             </div>
 
-            {/* RIGHT: ADDRESS CARDS */}
+
             <div className="col-12 col-md-6">
               <h4>Saved Addresses</h4>
               {addresses.length === 0 && <p>No addresses added yet.</p>}
@@ -146,7 +146,7 @@ const UserAccount = () => {
                 >
                   <div className="d-flex flex-column flex-md-row align-items-start">
 
-                    {/* RADIO BUTTON */}
+
                     <input
                       type="radio"
                       name="selectedAddress"

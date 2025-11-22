@@ -60,7 +60,6 @@ const CartPage = () => {
             <strong>Total Cart Items:</strong> {filteredCart.length}
           </p>
 
-          {/* ⭐ CART SUMMARY */}
           <div className="row mt-4 text-center">
             <div className="col-12">
               <div className="card p-3 shadow-sm" style={{ borderRadius: "10px" }}>
@@ -102,7 +101,7 @@ const CartPage = () => {
             <p className="alert alert-warning text-center mt-3">{wishlistMsg}</p>
           )}
 
-          {/* ⭐ CART ITEMS */}
+
           <div className="row mt">
             {filteredCart.map((book) => (
               <div key={book.bookName} className="col-12 col-md-4 my-3">
@@ -125,7 +124,6 @@ const CartPage = () => {
                   <p className="text-muted">{book.bookAuthor}</p>
                   <h4>Rs. {book.bookPrice}</h4>
 
-                  {/* QTY BUTTONS */}
                   <div className="d-flex justify-content-center align-items-center mt-2">
                     <button
                       className="btn btn-secondary btn-sm"
@@ -148,7 +146,7 @@ const CartPage = () => {
                     Subtotal: Rs. {book.bookPrice * book.quantity}
                   </h6>
 
-                  {/* ACTION BUTTONS */}
+         
                   <div className="d-flex justify-content-between mt-3">
                     <button
                       className="btn btn-danger w-50 me-2"

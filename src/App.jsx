@@ -43,7 +43,7 @@ function App() {
                       backgroundColor: '#fff'
                     }}
                   >
-                    {/* Fixed-height image container */}
+              
                     <div
                       style={{
                         height: "300px",
@@ -66,7 +66,6 @@ function App() {
                       />
                     </div>
 
-                    {/* Text below image */}
                     <div className='card-body d-flex flex-column mt-2' style={{ flex: 1 }}>
                       <p className='lead mb-1'>{d.bookAuthor}</p>
                       <p className='small mb-0'>Rating: ⭐ {d.bookRating}</p>

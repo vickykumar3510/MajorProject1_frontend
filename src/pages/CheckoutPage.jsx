@@ -16,15 +16,13 @@ const CheckoutPage = () => {
 
       <div className="container-fluid">
         <div className="container">
-
-          {/* Heading */}
           <h1 className="mt-4 mb-4 display-6 text-info text-center">
             Thank you for Shopping with us! 🥰
           </h1>
 
           <h3 className="text-center text-md-start">Below are your order details:</h3>
 
-          {/* ⭐ Delivery Address */}
+
           <div className="card p-3 mt-4 bg-success-subtle text-success-emphasis">
             <h4>Delivery Address</h4>
 
@@ -40,14 +38,13 @@ const CheckoutPage = () => {
             )}
           </div>
 
-          {/* ⭐ Order Summary */}
           <div className="card p-3 mt-4 bg-primary-subtle text-primary-emphasis">
             <h4>Order Summary</h4>
             <p><strong>Total Books:</strong> {totalBooks}</p>
             <p><strong>Total Amount:</strong> Rs. {totalPrice}</p>
           </div>
 
-          {/* ⭐ Book List */}
+
           <h4 className="mt-4">Items in Your Order:</h4>
 
           <div className="row">
@@ -55,7 +52,6 @@ const CheckoutPage = () => {
               <div className="col-12 col-sm-6 col-md-4 my-3" key={item.bookName}>
                 <div className="card p-3 text-center shadow-sm h-100">
 
-                  {/* Image */}
                   <img
                     src={item.bookImage}
                     alt={item.bookName}

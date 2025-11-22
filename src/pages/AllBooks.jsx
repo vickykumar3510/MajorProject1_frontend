@@ -1,4 +1,3 @@
-// AllBooks.jsx
 import { useContext, useState, useEffect } from "react";
 import SearchContext from "../contexts/SearchContext";
 import useFetch from "../../useFetch";
@@ -76,8 +75,6 @@ const AllBooks = () => {
   return (
     <main>
       <HeaderNoLogin />
-
-      {/* Body aligned perfectly with header */}
       <div className="container mt-3">
         <h2>Showing All Books:</h2>
         <p>Total Books: {finalBooks?.length || 0}</p>
@@ -86,7 +83,7 @@ const AllBooks = () => {
         {wishlistMsg && <p className="alert alert-warning text-center">{wishlistMsg}</p>}
 
         <div className="row mt-4">
-          {/* BOOK LIST */}
+
           <div className="col-12 col-lg-9 mb-4">
             {loading && <p>Loading...</p>}
             {error && <p>Error while loading...</p>}
@@ -99,7 +96,7 @@ const AllBooks = () => {
                   return (
                     <div className="col-12 col-sm-6 col-md-4 my-3" key={d._id}>
                       <div className="h-100 text-center pt-4">
-                        {/* Full Image */}
+ 
                         <img
                           src={d.bookImage}
                           alt={d.bookName}
@@ -157,7 +154,6 @@ const AllBooks = () => {
             )}
           </div>
 
-          {/* FILTER SIDEBAR */}
           <div className="col-12 col-lg-3">
             <div className="border rounded p-3">
               <button onClick={clearFilters} className="btn btn-sm btn-dark mb-2">

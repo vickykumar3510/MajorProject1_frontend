@@ -58,7 +58,7 @@ const WishList = () => {
                     <p>Rating: ⭐ {book.bookRating}</p>
                     <h4>Rs. {book.bookPrice}</h4>
 
-                    {/* ⭐ BUTTON ROW */}
+        
                     <div className="d-flex flex-column flex-md-row justify-content-center gap-2 mt-3">
 
                       <button className="btn btn-primary btn-sm w-100">

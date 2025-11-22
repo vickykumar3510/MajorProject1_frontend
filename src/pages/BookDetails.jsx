@@ -45,7 +45,7 @@ const BookDetails = () => {
                     <h1 className="text-center text-md-start">{d.bookName}</h1>
                     <p className="text-center text-md-start">by {d.bookAuthor}</p>
 
-                    {/* IMAGE */}
+        
                     <div className="text-center">
                       <img
                         src={d.bookImage}
@@ -65,12 +65,10 @@ const BookDetails = () => {
                       <p>Genre: {d.bookGenre.join(", ")}</p>
                     </div>
 
-                    {/* -------------------------------
-                       BUTTONS IN SAME ROW
-                    -------------------------------- */}
+   
                     <div className="d-flex flex-wrap gap-2 mt-3 justify-content-center justify-content-md-start">
 
-                      {/* CART LOGIC */}
+       
                       {inCart ? (
                         <div className="d-flex align-items-center">
                           <button
@@ -98,12 +96,11 @@ const BookDetails = () => {
                         </button>
                       )}
 
-                      {/* BUY NOW */}
                       <button className="btn btn-primary">
                         Buy Now
                       </button>
 
-                      {/* WISHLIST */}
+
                       <button
                         onClick={() => addToWishlist(d)}
                         className="btn btn-outline-danger"
