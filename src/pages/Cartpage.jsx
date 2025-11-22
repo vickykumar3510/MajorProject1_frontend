@@ -54,7 +54,7 @@ const CartPage = () => {
   return (
     <main>
       <HeaderNoLogin />
-        <div className="container">
+        <div className="container my-4">
 
           <p className="mt-4">
             <strong>Total Cart Items:</strong> {filteredCart.length}
