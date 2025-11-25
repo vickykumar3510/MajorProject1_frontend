@@ -1,4 +1,4 @@
-import NoLoginNoSearchBarHeader from "../components/NoLoginNoSearchBarHeader";
+import NoProfileNoSearchBarHeader from "../components/NoProfileNoSearchBarHeader";
 import Footer from "../components/Footer";
 import useFetch from "../../useFetch";
 import { useParams } from "react-router-dom";
@@ -19,13 +19,24 @@ const BookDetails = () => {
 
   return (
     <main>
-      <NoLoginNoSearchBarHeader />
+      <NoProfileNoSearchBarHeader />
 
       <div className="container-fluid">
         <div className="container my-4">
 
-          {loading && <p>Loading...</p>}
-          {error && <p>Error while fetching the data.</p>}
+
+          {loading && (
+            <p className="mt-4 mx-4 h4" style={{ fontWeight: "600" }}>
+              Loading...
+            </p>
+          )}
+
+      
+          {!loading && error && (
+            <p className="text-center mt-4 text-danger" style={{ fontWeight: "600" }}>
+              Error while fetching the data.
+            </p>
+          )}
 
           {cartMessage && (
             <p className="alert alert-success text-center">{cartMessage}</p>
@@ -35,7 +46,8 @@ const BookDetails = () => {
             <p className="alert alert-warning text-center">{wishlistMsg}</p>
           )}
 
-          {data && data.length > 0 ? (
+      
+          {!loading && !error && data && data.length > 0 ? (
             <div className="row justify-content-center">
               {data.map((d) => {
                 const inCart = cart.find((c) => c.bookName === d.bookName);
@@ -45,7 +57,6 @@ const BookDetails = () => {
                     <h1 className="text-center text-md-start">{d.bookName}</h1>
                     <p className="text-center text-md-start">by {d.bookAuthor}</p>
 
-        
                     <div className="text-center">
                       <img
                         src={d.bookImage}
@@ -65,10 +76,7 @@ const BookDetails = () => {
                       <p>Genre: {d.bookGenre.join(", ")}</p>
                     </div>
 
-   
                     <div className="d-flex flex-wrap gap-2 mt-3 justify-content-center justify-content-md-start">
-
-       
                       {inCart ? (
                         <div className="d-flex align-items-center">
                           <button
@@ -95,12 +103,6 @@ const BookDetails = () => {
                           Add to Cart
                         </button>
                       )}
-
-                      <button className="btn btn-primary">
-                        Buy Now
-                      </button>
-
-
                       <button
                         onClick={() => addToWishlist(d)}
                         className="btn btn-outline-danger"
@@ -118,7 +120,13 @@ const BookDetails = () => {
               })}
             </div>
           ) : (
-            <p>No Book Found.</p>
+        
+            !loading &&
+            !error && (
+              <p className="text-center mt-4" style={{ fontWeight: "600" }}>
+                No Book Found.
+              </p>
+            )
           )}
         </div>
       </div>

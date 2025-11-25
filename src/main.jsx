@@ -4,28 +4,24 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import LoginPage from './pages/LoginPage.jsx';
 import CartPage from './pages/Cartpage.jsx';
 import WishList from './pages/WishList.jsx';
-import HeaderNoLogin from './components/HeaderNoLogin.jsx';
+import HeaderNoProfile from './components/HeaderNoProfile.jsx';
 import AllBooks from './pages/AllBooks.jsx';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext.jsx';
 import { WishListProvider } from './contexts/WishListContext.jsx';
 import BookDetails from './pages/BookDetails.jsx';
-import NoLoginNoSearchBarHeader from './components/NoLoginNoSearchBarHeader.jsx';
-import UserAccount from './pages/UserAccount.jsx';
+import NoProfileNoSearchBarHeader from './components/NoProfileNoSearchBarHeader.jsx';
+import UserProfile from './pages/UserProfile.jsx';
 import { AddressProvider } from './contexts/AddressContext.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
+import HeaderNoSearchBar from './components/HeaderNoSearchBar.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>
-  },
-  {
-    path: "/loginpage",
-    element: <LoginPage/>
   },
   {
     path: "/cartpage",
@@ -36,8 +32,8 @@ const router = createBrowserRouter([
     element: <WishList/>
   },
   {
-    path: "/headernologin",
-    element: <HeaderNoLogin/>
+    path: "/headernoprofile",
+    element: <HeaderNoProfile/>
   },
   {
     path: "/allbooks",
@@ -48,16 +44,20 @@ const router = createBrowserRouter([
     element: <BookDetails/>
   },
   {
-    path :"/nologinnosearchbarheader",
-    element: <NoLoginNoSearchBarHeader/>
+    path :"/noprofilenosearchbarheader",
+    element: <NoProfileNoSearchBarHeader/>
   },
   {
-    path: "/useraccount",
-    element: <UserAccount/>
+    path: "/userprofile",
+    element: <UserProfile/>
   },
   {
     path: "/checkoutpage",
     element: <CheckoutPage/>
+  },
+  {
+    path: "/headernosearchbar",
+    element: <HeaderNoSearchBar/>
   }
 ])
 

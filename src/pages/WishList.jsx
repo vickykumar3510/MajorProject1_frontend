@@ -1,4 +1,4 @@
-import HeaderNoLogin from "../components/HeaderNoLogin";
+import HeaderNoProfile from "../components/HeaderNoProfile";
 import Footer from "../components/Footer";
 import { useContext } from "react";
 import WishlistContext from "../contexts/WishListContext";
@@ -26,7 +26,7 @@ const WishList = () => {
 
   return (
     <main>
-      <HeaderNoLogin />
+      <HeaderNoProfile />
 
       <div className="container-fluid">
         <div className="container">
@@ -60,10 +60,6 @@ const WishList = () => {
 
         
                     <div className="d-flex flex-column flex-md-row justify-content-center gap-2 mt-3">
-
-                      <button className="btn btn-primary btn-sm w-100">
-                        Buy Now
-                      </button>
 
                       {!cartItem ? (
                         <button

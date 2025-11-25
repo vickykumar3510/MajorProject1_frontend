@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
 import WishlistContext from "../contexts/WishListContext";
 
-const NoLoginNoSearchBarHeader = () => {
+const NoProfileNoSearchBarHeader = () => {
   const { wishlist } = useContext(WishlistContext);
   const { cart } = useContext(CartContext);
 
@@ -33,4 +33,4 @@ const NoLoginNoSearchBarHeader = () => {
   );
 };
 
-export default NoLoginNoSearchBarHeader;
+export default NoProfileNoSearchBarHeader;

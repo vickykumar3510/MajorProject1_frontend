@@ -1,14 +1,6 @@
-import { useContext } from "react";
-import SearchContext from "../contexts/SearchContext";
 import { Link } from "react-router-dom";
 
-const Header = () => {
-  const { setSearchTerm } = useContext(SearchContext);
-
-  const handleInput = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
+const HeaderNoSearchBar = () => {
   return (
     <header className="bg-info p-2">
       <div className="container">
@@ -19,16 +11,7 @@ const Header = () => {
           📖 <strong>BookWala</strong>
         </Link>
         </div>
-
-        <div className="col-12 col-md-6 my-2 my-md-0">
-          <input
-            onChange={handleInput}
-            type="text"
-            className="form-control"
-            placeholder="Search by title, author, genre"
-            
-          />
-        </div>
+        <div className="col-12 col-md-6 my-2 my-md-0"></div>
 
         <div className="col-12 col-md-3 d-flex justify-content-md-end gap-2">
           <Link to="/userprofile" className="btn btn-light btn-sm">Profile</Link>
@@ -41,4 +24,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderNoSearchBar;
