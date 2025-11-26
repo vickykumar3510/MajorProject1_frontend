@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import SearchContext from "../contexts/SearchContext";
 import useFetch from "../../useFetch";
-import HeaderNoProfile from "../components/HeaderNoProfile";
+import Header from '../components/Header';
 import Footer from "../components/Footer";
 import { useNavigate, useLocation } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
@@ -83,7 +83,7 @@ const AllBooks = () => {
 
   return (
     <main>
-      <HeaderNoProfile />
+      <Header />
       <div className="container mt-3">
         <h2>Showing All Books:</h2>
         <p>Total Books: {finalBooks?.length || 0}</p>

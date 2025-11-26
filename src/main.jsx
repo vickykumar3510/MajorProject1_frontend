@@ -6,13 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import CartPage from './pages/Cartpage.jsx';
 import WishList from './pages/WishList.jsx';
-import HeaderNoProfile from './components/HeaderNoProfile.jsx';
 import AllBooks from './pages/AllBooks.jsx';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext.jsx';
 import { WishListProvider } from './contexts/WishListContext.jsx';
 import BookDetails from './pages/BookDetails.jsx';
-import NoProfileNoSearchBarHeader from './components/NoProfileNoSearchBarHeader.jsx';
 import UserProfile from './pages/UserProfile.jsx';
 import { AddressProvider } from './contexts/AddressContext.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
@@ -32,20 +30,12 @@ const router = createBrowserRouter([
     element: <WishList/>
   },
   {
-    path: "/headernoprofile",
-    element: <HeaderNoProfile/>
-  },
-  {
     path: "/allbooks",
     element: <AllBooks/>
   },
   {
     path: "/bookName/:name",
     element: <BookDetails/>
-  },
-  {
-    path :"/noprofilenosearchbarheader",
-    element: <NoProfileNoSearchBarHeader/>
   },
   {
     path: "/userprofile",

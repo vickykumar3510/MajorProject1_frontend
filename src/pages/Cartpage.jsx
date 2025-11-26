@@ -18,6 +18,10 @@ const CartPage = () => {
   const search = searchTerm?.toLowerCase() || "";
   const navigate = useNavigate();
 
+  const goToProfile = () => {
+    navigate("/userprofile")
+  }
+
   const filteredCart = cart.filter(
     (b) =>
       b.bookName?.toLowerCase().includes(search) ||
@@ -71,6 +75,11 @@ const CartPage = () => {
               <label className="mt-3">
                 <strong>Select Delivery Address:</strong>
               </label>
+              <button
+                  onClick={goToProfile}
+                  className="btn btn-danger" style={{width: "200px"}}>
+                  Add Address
+                </button>
 
               <select
                 className="form-control mt-2"

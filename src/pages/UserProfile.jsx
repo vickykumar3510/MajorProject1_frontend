@@ -1,4 +1,4 @@
-import NoProfileNoSearchBarHeader from "../components/NoProfileNoSearchBarHeader";
+import HeaderNoSearchBar from "../components/HeaderNoSearchBar";
 import Footer from "../components/Footer";
 import { useState, useContext, useEffect } from "react";
 import AddressContext from "../contexts/AddressContext";
@@ -157,7 +157,7 @@ const UserProfile = () => {
 
   return (
     <main>
-      <NoProfileNoSearchBarHeader />
+      <HeaderNoSearchBar />
       <div className="container-fluid">
         <div className="container my-4">
 

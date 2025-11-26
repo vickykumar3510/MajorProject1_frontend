@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import CartContext from "../contexts/CartContext";
+import WishlistContext from "../contexts/WishListContext";
+import { useContext } from "react";
 
 const HeaderNoSearchBar = () => {
+    const { wishlist } = useContext(WishlistContext);
+  const { cart } = useContext(CartContext);
   return (
     <header className="bg-info p-2">
       <div className="container">
@@ -15,8 +20,8 @@ const HeaderNoSearchBar = () => {
 
         <div className="col-12 col-md-3 d-flex justify-content-md-end gap-2">
           <Link to="/userprofile" className="btn btn-light btn-sm">Profile</Link>
-          <Link to="/wishlist" className="btn btn-light btn-sm">Wish List</Link>
-          <Link to="/cartpage" className="btn btn-light btn-sm">Cart</Link>
+          <Link to="/wishlist" className="btn btn-light btn-sm">Wish List({wishlist.length})</Link>
+          <Link to="/cartpage" className="btn btn-light btn-sm">Cart({cart.length})</Link>
         </div>
       </div>
       </div>

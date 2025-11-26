@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import SearchContext from "../contexts/SearchContext";
 import { Link } from "react-router-dom";
+import WishlistContext from "../contexts/WishListContext";
+import CartContext from "../contexts/CartContext";
 
 const Header = () => {
   const { setSearchTerm } = useContext(SearchContext);
+  const {wishlist } = useContext(WishlistContext)
+  const {cart} = useContext(CartContext)
 
   const handleInput = (e) => {
     setSearchTerm(e.target.value);
@@ -32,8 +36,8 @@ const Header = () => {
 
         <div className="col-12 col-md-3 d-flex justify-content-md-end gap-2">
           <Link to="/userprofile" className="btn btn-light btn-sm">Profile</Link>
-          <Link to="/wishlist" className="btn btn-light btn-sm">Wish List</Link>
-          <Link to="/cartpage" className="btn btn-light btn-sm">Cart</Link>
+          <Link to="/wishlist" className="btn btn-light btn-sm">Wish List({wishlist.length})</Link>
+          <Link to="/cartpage" className="btn btn-light btn-sm">Cart({cart.length})</Link>
         </div>
       </div>
       </div>

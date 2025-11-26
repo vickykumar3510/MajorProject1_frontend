@@ -1,10 +1,10 @@
-import NoProfileNoSearchBarHeader from "../components/NoProfileNoSearchBarHeader";
 import Footer from "../components/Footer";
 import useFetch from "../../useFetch";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import CartContext from "../contexts/CartContext";
 import WishlistContext from "../contexts/WishListContext";
+import HeaderNoSearchBar from "../components/HeaderNoSearchBar";
 
 const BookDetails = () => {
   const { name } = useParams();
@@ -19,7 +19,7 @@ const BookDetails = () => {
 
   return (
     <main>
-      <NoProfileNoSearchBarHeader />
+      <HeaderNoSearchBar />
 
       <div className="container-fluid">
         <div className="container my-4">

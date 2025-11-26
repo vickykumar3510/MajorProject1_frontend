@@ -1,4 +1,4 @@
-import HeaderNoProfile from "../components/HeaderNoProfile";
+import HeaderNoSearchBar from "../components/HeaderNoSearchBar";
 import Footer from "../components/Footer";
 import { useContext } from "react";
 import WishlistContext from "../contexts/WishListContext";
@@ -26,7 +26,7 @@ const WishList = () => {
 
   return (
     <main>
-      <HeaderNoProfile />
+      <HeaderNoSearchBar />
 
       <div className="container-fluid">
         <div className="container">
