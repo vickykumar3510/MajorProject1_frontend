@@ -89,7 +89,7 @@ const UserProfile = () => {
                 const matchingAddress = addresses.find(
                   addr => `${addr.house}, ${addr.area}, ${addr.landmark}, ${addr.city}, ${addr.state} - ${addr.pincode}` === order.customerAddress
                 );
-                const displayName = matchingAddress?.nickname || order.customerName || "Not provided";
+                const displayName = matchingAddress?.nickname || "Not provided";
 
                 return (
                   <div key={order._id} className="card p-3 shadow-sm">
