@@ -1,20 +1,33 @@
-import { createContext, useContext, useState } from "react";
-import { useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem("cart");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
   const [cartMessage, setCartMessage] = useState("");
+
+  
   useEffect(() => {
-  if (!cartMessage) return;
+    try {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch {}
+  }, [cart]);
 
-  const timer = setTimeout(() => {
-    setCartMessage("");
-  }, 1500);
 
-  return () => clearTimeout(timer);
-}, [cartMessage]);
+  useEffect(() => {
+    if (!cartMessage) return;
+    const t = setTimeout(() => setCartMessage(""), 1500);
+    return () => clearTimeout(t);
+  }, [cartMessage]);
 
   const addToCart = (book) => {
     setCart((prev) => {
@@ -28,8 +41,8 @@ export const CartProvider = ({ children }) => {
             : b
         );
       }
-      setCartMessage(`"${book.bookName}" added to cart`);
 
+      setCartMessage(`"${book.bookName}" added to cart`);
       return [...prev, { ...book, quantity: 1 }];
     });
   };
@@ -43,23 +56,22 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-const decreaseQty = (bookName) => {
-  setCart((prev) => {
-    const item = prev.find((b) => b.bookName === bookName);
+  const decreaseQty = (bookName) => {
+    setCart((prev) => {
+      const item = prev.find((b) => b.bookName === bookName);
+      if (item.quantity === 1) {
+        setCartMessage(`"${bookName}" removed from cart`);
+        return prev.filter((b) => b.bookName !== bookName);
+      }
 
-    if (item.quantity === 1) {
-      setCartMessage(`"${bookName}" removed from cart`);
-      return prev.filter((b) => b.bookName !== bookName);
-    }
-
-    setCartMessage(`Decreased quantity of "${bookName}"`);
-    return prev.map((b) =>
-      b.bookName === bookName
-        ? { ...b, quantity: b.quantity - 1 }
-        : b
-    );
-  });
-};
+      setCartMessage(`Decreased quantity of "${bookName}"`);
+      return prev.map((b) =>
+        b.bookName === bookName
+          ? { ...b, quantity: b.quantity - 1 }
+          : b
+      );
+    });
+  };
 
   const removeFromCart = (bookName) => {
     setCartMessage(`"${bookName}" removed from cart`);
@@ -81,14 +93,12 @@ const decreaseQty = (bookName) => {
         removeFromCart,
         totalPrice,
         cartMessage,
-        setCartMessage
+        setCart,
       }}
     >
       {children}
     </CartContext.Provider>
   );
 };
-
-export const useCart = () => useContext(CartContext);
 
 export default CartContext;

@@ -96,7 +96,6 @@ const AllBooks = () => {
         )}
 
         <div className="row mt-4">
-        
           <div className="col-12 col-lg-9 mb-4">
             {loading && <p className="mt-4 mx-4 h4">Loading...</p>}
             {error && <p>Error while loading...</p>}
@@ -112,7 +111,10 @@ const AllBooks = () => {
 
                   return (
                     <div className="col-12 col-sm-6 col-md-4 my-3" key={d._id}>
-                      <div className="h-100 text-center pt-4">
+                      <div
+                        className="h-100 text-center d-flex flex-column pt-4"
+                        style={{ minHeight: "450px" }}
+                      >
                         <img
                           src={d.bookImage}
                           alt={d.bookName}
@@ -125,51 +127,68 @@ const AllBooks = () => {
                           onClick={() => navigate(`/bookName/${d.bookName}`)}
                         />
 
-                        <div className="d-flex flex-column mt-2">
-                          <div
-                            style={{ height: "40px" }}
-                            className="text-truncate"
-                          >
-                            <h5 className="m-0">{d.bookName}</h5>
+                        <div className="d-flex flex-column mt-2 flex-grow-1 justify-content-between">
+                          <div>
+                            <h5
+                              style={{
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                                wordBreak: "break-word",
+                                minHeight: "3em",
+                                marginBottom: "2px"
+                              }}
+                              title={d.bookName}
+                            >
+                              {d.bookName}
+                            </h5>
+                            <p className="lead mb-1">{d.bookAuthor}</p>
+                            <small>Rating: ⭐ {d.bookRating}</small>
+                            <h5>Rs. {d.bookPrice}</h5>
                           </div>
 
-                          <p className="lead mb-1">{d.bookAuthor}</p>
-                          <small>Rating: ⭐ {d.bookRating}</small>
-                          <h5>Rs. {d.bookPrice}</h5>
+              
+                          <div className="d-flex flex-column mt-2 align-items-center gap-2">
+              
+                            {inCart && (
+                              <div className="d-flex align-items-center gap-2">
+                                <button
+                                  className="btn btn-secondary btn-sm"
+                                  style={{ width: "25px", height: "25px", padding: 0 }}
+                                  onClick={() => decreaseQty(d.bookName)}
+                                >
+                                  -
+                                </button>
+                                <span className="fs-5">{inCart.quantity}</span>
+                                <button
+                                  className="btn btn-secondary btn-sm"
+                                  style={{ width: "25px", height: "25px", padding: 0 }}
+                                  onClick={() => increaseQty(d.bookName)}
+                                >
+                                  +
+                                </button>
+                              </div>
+                            )}
 
-                          {inCart ? (
-                            <div className="d-flex justify-content-center align-items-center mt-2">
+                
+                            <div className="d-flex gap-2 mt-2">
+                              {!inCart && (
+                                <button
+                                  className="btn btn-warning btn-sm"
+                                  onClick={() => addToCart(d)}
+                                >
+                                  Add to Cart
+                                </button>
+                              )}
                               <button
-                                className="btn btn-secondary"
-                                onClick={() => decreaseQty(d.bookName)}
+                                className="btn btn-outline-danger btn-sm"
+                                onClick={() => addToWishlist(d)}
                               >
-                                -
-                              </button>
-                              <span className="mx-2 fs-5">
-                                {inCart.quantity}
-                              </span>
-                              <button
-                                className="btn btn-secondary"
-                                onClick={() => increaseQty(d.bookName)}
-                              >
-                                +
+                                Add to Wishlist
                               </button>
                             </div>
-                          ) : (
-                            <button
-                              className="btn btn-warning mt-2"
-                              onClick={() => addToCart(d)}
-                            >
-                              Add to Cart
-                            </button>
-                          )}
-
-                          <button
-                            className="btn btn-outline-danger mt-2"
-                            onClick={() => addToWishlist(d)}
-                          >
-                            Add to Wishlist
-                          </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -179,7 +198,6 @@ const AllBooks = () => {
             )}
           </div>
 
-        
           <div className="col-12 col-lg-3">
             <div className="border rounded p-3">
               <button

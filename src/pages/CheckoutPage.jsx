@@ -21,7 +21,6 @@ const CheckoutPage = () => {
   const hasSaved = useRef(false);
 
   useEffect(() => {
-  
     if (hasSaved.current) return;
     hasSaved.current = true;
 
@@ -31,12 +30,9 @@ const CheckoutPage = () => {
       try {
         const orderData = {
           items: orderCart,
-
-    
           customerName: "Vicky Kumar",
           customerAddress: `${address.house}, ${address.area}, ${address.landmark}, ${address.city}, ${address.state} - ${address.pincode}`,
           customerPhone: "9999991254",
-
           totalPrice,
           totalBooks,
           orderDate,
@@ -70,10 +66,8 @@ const CheckoutPage = () => {
 
           <h3 className="text-center text-md-start">Below are your order details:</h3>
 
-      
           <div className="card p-3 mt-4 bg-success-subtle text-success-emphasis">
             <h4>Delivery Address</h4>
-
             {address ? (
               <>
                 <p><strong>{address.nickname}</strong></p>
@@ -86,7 +80,6 @@ const CheckoutPage = () => {
             )}
           </div>
 
-    
           <div className="card p-3 mt-4 bg-primary-subtle text-primary-emphasis">
             <h4>Order Summary</h4>
             <p><strong>Total Books:</strong> {totalBooks}</p>
@@ -97,7 +90,6 @@ const CheckoutPage = () => {
 
           <h4 className="mt-4">Items in Your Order:</h4>
 
-    
           <div
             className="d-flex overflow-auto gap-3 py-3"
             style={{ whiteSpace: "nowrap" }}
@@ -119,11 +111,25 @@ const CheckoutPage = () => {
                   }}
                 />
 
-                <h6 className="mt-2">{item.bookName}</h6>
+             
+                <h6
+                  className="mt-2"
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2, 
+                    WebkitBoxOrient: "vertical",
+                    wordBreak: "break-word",
+                    whiteSpace: "normal"
+                  }}
+                  title={item.bookName} 
+                >
+                  {item.bookName}
+                </h6>
+
                 <p className="text-muted small">{item.bookAuthor}</p>
-
                 <p className="small">Quantity: {item.quantity}</p>
-
                 <p className="fw-bold">Rs. {item.bookPrice * item.quantity}</p>
               </div>
             ))}

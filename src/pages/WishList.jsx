@@ -1,14 +1,14 @@
 import HeaderNoSearchBar from "../components/HeaderNoSearchBar";
 import Footer from "../components/Footer";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import WishlistContext from "../contexts/WishListContext";
 import CartContext from "../contexts/CartContext";
 import SearchContext from "../contexts/SearchContext";
 import { useNavigate } from "react-router-dom";
 
 const WishList = () => {
-  const { wishlist, removeFromWishlist } = useContext(WishlistContext);
-  const { cart, addToCart, increaseQty, decreaseQty } = useContext(CartContext);
+  const { wishlist, removeFromWishlist, setWishlist } = useContext(WishlistContext);
+  const { cart, addToCart, increaseQty, decreaseQty, setCart } = useContext(CartContext);
   const { searchTerm } = useContext(SearchContext);
   const { cartMessage } = useContext(CartContext);
   const { wishlistMsg } = useContext(WishlistContext);
@@ -24,6 +24,31 @@ const WishList = () => {
 
   const getCartItem = (name) => cart.find((item) => item.bookName === name);
 
+  useEffect(() => {
+    const savedWishlist = localStorage.getItem("wishlist");
+    const savedCart = localStorage.getItem("cart");
+
+    if (savedWishlist) {
+      try {
+        setWishlist(JSON.parse(savedWishlist));
+      } catch {}
+    }
+
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <main>
       <HeaderNoSearchBar />
@@ -34,8 +59,8 @@ const WishList = () => {
             <strong>Total Wishlist Items:</strong> {filteredWishlist.length}
           </p>
 
-          {cartMessage && <p className="alert alert-success text-center">{cartMessage}</p>} 
-          {wishlistMsg && <p className="alert alert-warning text-center">{wishlistMsg}</p>} 
+          {cartMessage && <p className="alert alert-success text-center">{cartMessage}</p>}
+          {wishlistMsg && <p className="alert alert-warning text-center">{wishlistMsg}</p>}
 
           <div className="row mt-3">
             {filteredWishlist.map((book) => {
@@ -58,7 +83,6 @@ const WishList = () => {
                     <p>Rating: ⭐ {book.bookRating}</p>
                     <h4>Rs. {book.bookPrice}</h4>
 
-        
                     <div className="d-flex flex-column flex-md-row justify-content-center gap-2 mt-3">
 
                       {!cartItem ? (

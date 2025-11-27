@@ -4,12 +4,13 @@ import CartContext from "../contexts/CartContext";
 import SearchContext from "../contexts/SearchContext";
 import WishlistContext from "../contexts/WishListContext";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AddressContext from "../contexts/AddressContext";
 
 const CartPage = () => {
   const { addresses, selectedAddress, setSelectedAddress } = useContext(AddressContext);
-  const { cart, removeFromCart, increaseQty, decreaseQty, totalPrice } = useContext(CartContext);
+  const { cart, removeFromCart, increaseQty, decreaseQty, totalPrice, setCart } =
+    useContext(CartContext);
   const { searchTerm } = useContext(SearchContext);
   const { addToWishlist } = useContext(WishlistContext);
   const { cartMessage } = useContext(CartContext);
@@ -19,8 +20,8 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   const goToProfile = () => {
-    navigate("/userprofile")
-  }
+    navigate("/userprofile");
+  };
 
   const filteredCart = cart.filter(
     (b) =>
@@ -31,7 +32,7 @@ const CartPage = () => {
   const totalBookQuantity = filteredCart.reduce((sum, b) => sum + b.quantity, 0);
 
   const handleCheckout = () => {
-    if (!filteredCart.length) return; 
+    if (!filteredCart.length) return;
 
     if (!selectedAddress) {
       alert("Please provide a delivery address before proceeding!");
@@ -53,6 +54,20 @@ const CartPage = () => {
       },
     });
   };
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <main>
@@ -76,14 +91,16 @@ const CartPage = () => {
                 <strong>Select Delivery Address:</strong>
               </label>
               <button
-                  onClick={goToProfile}
-                  className="btn btn-danger" style={{width: "200px"}}>
-                  Add Address
-                </button>
+                onClick={goToProfile}
+                className="btn btn-danger"
+                style={{ width: "200px" }}
+              >
+                Add Address
+              </button>
 
               <select
                 className="form-control mt-2"
-                value={selectedAddress || ""}
+                value={selectedAddress?.id || ""}
                 onChange={(e) => setSelectedAddress(Number(e.target.value))}
               >
                 <option value="">-- Select Address --</option>
@@ -98,7 +115,7 @@ const CartPage = () => {
                 <button
                   onClick={handleCheckout}
                   className="btn btn-success px-4"
-                  disabled={filteredCart.length === 0} 
+                  disabled={filteredCart.length === 0}
                 >
                   Proceed to Checkout
                 </button>
@@ -135,11 +152,17 @@ const CartPage = () => {
                 <h4>Rs. {book.bookPrice}</h4>
 
                 <div className="d-flex justify-content-center align-items-center mt-2">
-                  <button className="btn btn-secondary btn-sm" onClick={() => decreaseQty(book.bookName)}>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => decreaseQty(book.bookName)}
+                  >
                     -
                   </button>
                   <span className="mx-3">{book.quantity}</span>
-                  <button className="btn btn-secondary btn-sm" onClick={() => increaseQty(book.bookName)}>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => increaseQty(book.bookName)}
+                  >
                     +
                   </button>
                 </div>
@@ -147,10 +170,16 @@ const CartPage = () => {
                 <h6 className="mt-2">Subtotal: Rs. {book.bookPrice * book.quantity}</h6>
 
                 <div className="d-flex justify-content-between mt-3">
-                  <button className="btn btn-danger w-50 me-2" onClick={() => removeFromCart(book.bookName)}>
+                  <button
+                    className="btn btn-danger w-50 me-2"
+                    onClick={() => removeFromCart(book.bookName)}
+                  >
                     Remove
                   </button>
-                  <button className="btn btn-outline-danger w-50" onClick={() => addToWishlist(book)}>
+                  <button
+                    className="btn btn-outline-danger w-50"
+                    onClick={() => addToWishlist(book)}
+                  >
                     Add to Wishlist
                   </button>
                 </div>
