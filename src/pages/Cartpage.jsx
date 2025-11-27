@@ -34,25 +34,19 @@ const CartPage = () => {
   const handleCheckout = () => {
     if (!filteredCart.length) return;
 
-    if (!selectedAddress) {
-      alert("Please provide a delivery address before proceeding!");
-      return;
-    }
+ if (!selectedAddress) {
+  alert("Selected address not found. Please try again.");
+  return;
+}
 
-    const selectedAddrDetails = addresses.find((a) => a.id === selectedAddress);
-    if (!selectedAddrDetails) {
-      alert("Selected address not found. Please try again.");
-      return;
-    }
-
-    navigate("/checkoutpage", {
-      state: {
-        orderCart: filteredCart,
-        address: selectedAddrDetails,
-        totalPrice,
-        totalBookQuantity,
-      },
-    });
+navigate("/checkoutpage", {
+  state: {
+    orderCart: filteredCart,
+    address: selectedAddress,
+    totalPrice,
+    totalBookQuantity,
+  }
+});
   };
 
   useEffect(() => {
@@ -101,7 +95,10 @@ const CartPage = () => {
               <select
                 className="form-control mt-2"
                 value={selectedAddress?.id || ""}
-                onChange={(e) => setSelectedAddress(Number(e.target.value))}
+                onChange={(e) => {
+  const addr = addresses.find(a => a.id === Number(e.target.value));
+  setSelectedAddress(addr);
+}}
               >
                 <option value="">-- Select Address --</option>
                 {addresses.map((a) => (

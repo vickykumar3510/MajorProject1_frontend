@@ -30,7 +30,7 @@ const CheckoutPage = () => {
       try {
         const orderData = {
           items: orderCart,
-          customerName: "Vicky Kumar",
+          customerName: `${address.nickname}`,
           customerAddress: `${address.house}, ${address.area}, ${address.landmark}, ${address.city}, ${address.state} - ${address.pincode}`,
           customerPhone: "9999991254",
           totalPrice,
