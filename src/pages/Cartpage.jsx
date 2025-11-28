@@ -95,16 +95,8 @@ const CartPage = () => {
               <h4>Total Amount: Rs. {totalPrice}</h4>
 
               <label className="mt-3">
-                <strong>Select Delivery Address:</strong>
+                <strong>Select a Delivery Address:</strong>
               </label>
-
-              <button
-                onClick={goToProfile}
-                className="btn btn-danger mt-2"
-                style={{ width: "160px", maxWidth: "300px" }}
-              >
-                Add Address
-              </button>
 
               <select
                 className="form-control mt-3"
@@ -125,18 +117,28 @@ const CartPage = () => {
                 ))}
               </select>
 
-              <div className="mt-3 text-end">
-                <button
-                  onClick={handleCheckout}
-                  className="btn btn-success px-4"
-                  style={{ width: "200px", maxWidth: "300px" }}
-                  disabled={cart.length === 0}
-                >
-                  Proceed to Checkout
-                </button>
+              <div className="mt-3 d-flex flex-column flex-md-row gap-2">
 
+<button
+  onClick={goToProfile}
+  className="btn btn-warning w-100 w-md-auto flex-md-grow-0"
+>
+  Add Address
+</button>
+
+<button
+  onClick={handleCheckout}
+  className="btn btn-success w-100 w-md-auto flex-md-grow-0"
+  disabled={cart.length === 0}
+>
+  Proceed to Checkout
+</button>
+
+</div>
+
+              <div className="mt-3 text-end">
                 {cart.length === 0 && (
-                  <p className="text-danger mt-2">Cannot proceed: Cart is empty.</p>
+                  <p className="text-danger px-4 w-100 w-md-auto">Cannot proceed: Cart is empty.</p>
                 )}
               </div>
             </div>
