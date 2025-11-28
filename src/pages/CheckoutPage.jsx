@@ -1,7 +1,8 @@
 import HeaderNoSearchBar from "../components/HeaderNoSearchBar";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
+import CartContext from "../contexts/CartContext";
 
 const CheckoutPage = () => {
   const { state } = useLocation();
@@ -10,6 +11,8 @@ const CheckoutPage = () => {
   const address = state?.address;
   const totalPrice = state?.totalPrice;
   const totalBooks = state?.totalBookQuantity;
+
+  const { setCart } = useContext(CartContext); 
 
   const now = new Date();
   const orderDate = now.toLocaleDateString("en-IN");
@@ -46,6 +49,11 @@ const CheckoutPage = () => {
         });
 
         console.log("Order saved successfully!");
+
+      
+        setCart([]);
+        localStorage.removeItem("cart");
+
       } catch (err) {
         console.error("Failed to save order", err);
       }
@@ -111,19 +119,18 @@ const CheckoutPage = () => {
                   }}
                 />
 
-             
                 <h6
                   className="mt-2"
                   style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     display: "-webkit-box",
-                    WebkitLineClamp: 2, 
+                    WebkitLineClamp: 2,
                     WebkitBoxOrient: "vertical",
                     wordBreak: "break-word",
-                    whiteSpace: "normal"
+                    whiteSpace: "normal",
                   }}
-                  title={item.bookName} 
+                  title={item.bookName}
                 >
                   {item.bookName}
                 </h6>

@@ -3,24 +3,30 @@ import { createContext, useState, useEffect } from "react";
 const AddressContext = createContext();
 
 export const AddressProvider = ({ children }) => {
-  
+
+  // Safe JSON.parse wrapper
+  const safeParse = (data, fallback) => {
+    try {
+      return data ? JSON.parse(data) : fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
   const [addresses, setAddresses] = useState(() => {
     const saved = localStorage.getItem("addresses");
-    return saved ? JSON.parse(saved) : [];
+    return safeParse(saved, []);
   });
 
-  
   const [selectedAddress, setSelectedAddress] = useState(() => {
     const saved = localStorage.getItem("selectedAddress");
-    return saved ? JSON.parse(saved) : null;
+    return safeParse(saved, null);
   });
 
-  
   useEffect(() => {
     localStorage.setItem("addresses", JSON.stringify(addresses));
   }, [addresses]);
 
-  
   useEffect(() => {
     localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
   }, [selectedAddress]);
@@ -38,7 +44,6 @@ export const AddressProvider = ({ children }) => {
   const deleteAddress = (id) => {
     setAddresses((prev) => prev.filter((a) => a.id !== id));
 
-    
     setSelectedAddress((prev) => (prev?.id === id ? null : prev));
 
     alert("Address deleted successfully!");

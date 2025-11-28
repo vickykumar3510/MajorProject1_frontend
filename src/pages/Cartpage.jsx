@@ -166,7 +166,7 @@ navigate("/checkoutpage", {
 
                 <h6 className="mt-2">Subtotal: Rs. {book.bookPrice * book.quantity}</h6>
 
-                <div className="d-flex justify-content-between mt-3">
+                <div className="d-flex justify-content-between mt-3 gap-2">
                   <button
                     className="btn btn-danger w-50 me-2"
                     onClick={() => removeFromCart(book.bookName)}
