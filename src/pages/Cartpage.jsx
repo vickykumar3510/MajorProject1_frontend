@@ -9,12 +9,19 @@ import AddressContext from "../contexts/AddressContext";
 
 const CartPage = () => {
   const { addresses, selectedAddress, setSelectedAddress } = useContext(AddressContext);
-  const { cart, removeFromCart, increaseQty, decreaseQty, totalPrice, setCart } =
-    useContext(CartContext);
+
+  const {
+    cart,
+    removeFromCart,
+    increaseQty,
+    decreaseQty,
+    totalPrice,
+    setCart,
+    cartMessage
+  } = useContext(CartContext);
+
   const { searchTerm } = useContext(SearchContext);
-  const { addToWishlist } = useContext(WishlistContext);
-  const { cartMessage } = useContext(CartContext);
-  const { wishlistMsg } = useContext(WishlistContext);
+  const { addToWishlist, wishlistMsg } = useContext(WishlistContext);
 
   const search = searchTerm?.toLowerCase() || "";
   const navigate = useNavigate();
@@ -29,29 +36,28 @@ const CartPage = () => {
       b.bookAuthor?.toLowerCase().includes(search)
   );
 
-  const totalBookQuantity = filteredCart.reduce((sum, b) => sum + b.quantity, 0);
+  const totalBookQuantity = cart.reduce((sum, b) => sum + b.quantity, 0);
 
   const handleCheckout = () => {
-    if (!filteredCart.length) return;
+    if (!cart.length) return;
 
- if (!selectedAddress) {
-  alert("Selected address not found. Please try again.");
-  return;
-}
+    if (!selectedAddress) {
+      alert("Selected address not found. Please try again.");
+      return;
+    }
 
-navigate("/checkoutpage", {
-  state: {
-    orderCart: filteredCart,
-    address: selectedAddress,
-    totalPrice,
-    totalBookQuantity,
-  }
-});
+    navigate("/checkoutpage", {
+      state: {
+        orderCart: cart, 
+        address: selectedAddress,
+        totalPrice,
+        totalBookQuantity,
+      },
+    });
   };
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
-
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
@@ -68,13 +74,20 @@ navigate("/checkoutpage", {
       <Header />
 
       <div className="container my-4">
+
         <p className="mt-4">
-          <strong>Total Cart Items:</strong> {filteredCart.length}
+          <strong>Total Cart Items:</strong> {cart.length}
         </p>
 
         <div className="row mt-4 text-center">
           <div className="col-12">
-            <div className="card p-3 shadow-sm" style={{ borderRadius: "10px" }}>
+            <div
+              className="card p-3 shadow-sm"
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+              }}
+            >
               <h3 className="text-center">Cart Summary</h3>
               <hr />
 
@@ -84,23 +97,27 @@ navigate("/checkoutpage", {
               <label className="mt-3">
                 <strong>Select Delivery Address:</strong>
               </label>
+
               <button
                 onClick={goToProfile}
-                className="btn btn-danger"
-                style={{ width: "200px" }}
+                className="btn btn-danger mt-2"
+                style={{ width: "160px", maxWidth: "300px" }}
               >
                 Add Address
               </button>
 
               <select
-                className="form-control mt-2"
+                className="form-control mt-3"
                 value={selectedAddress?.id || ""}
                 onChange={(e) => {
-  const addr = addresses.find(a => a.id === Number(e.target.value));
-  setSelectedAddress(addr);
-}}
+                  const addr = addresses.find(
+                    (a) => a.id === Number(e.target.value)
+                  );
+                  setSelectedAddress(addr);
+                }}
               >
                 <option value="">-- Select Address --</option>
+
                 {addresses.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.nickname} — {a.city}, {a.state}
@@ -112,11 +129,13 @@ navigate("/checkoutpage", {
                 <button
                   onClick={handleCheckout}
                   className="btn btn-success px-4"
-                  disabled={filteredCart.length === 0}
+                  style={{ width: "200px", maxWidth: "300px" }}
+                  disabled={cart.length === 0}
                 >
                   Proceed to Checkout
                 </button>
-                {filteredCart.length === 0 && (
+
+                {cart.length === 0 && (
                   <p className="text-danger mt-2">Cannot proceed: Cart is empty.</p>
                 )}
               </div>
@@ -134,13 +153,18 @@ navigate("/checkoutpage", {
 
         <div className="row mt-4">
           {filteredCart.map((book) => (
-            <div key={book.bookName} className="col-12 col-md-4 my-3">
+            <div key={book.id || book.bookName} className="col-12 col-md-4 my-3">
               <div className="card p-3 text-center shadow-sm">
                 <img
                   src={book.bookImage}
                   alt={book.bookName}
                   className="mx-auto"
-                  style={{ width: "120px", height: "160px", objectFit: "cover", cursor: "pointer" }}
+                  style={{
+                    width: "120px",
+                    height: "160px",
+                    objectFit: "cover",
+                    cursor: "pointer",
+                  }}
                   onClick={() => navigate(`/bookName/${book.bookName}`)}
                 />
 
@@ -164,7 +188,9 @@ navigate("/checkoutpage", {
                   </button>
                 </div>
 
-                <h6 className="mt-2">Subtotal: Rs. {book.bookPrice * book.quantity}</h6>
+                <h6 className="mt-2">
+                  Subtotal: Rs. {book.bookPrice * book.quantity}
+                </h6>
 
                 <div className="d-flex justify-content-between mt-3 gap-2">
                   <button
