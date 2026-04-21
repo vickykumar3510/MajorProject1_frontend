@@ -14,10 +14,10 @@ function App() {
 
   const search = searchTerm?.toLowerCase() || "";
 
-  const filtered = data?.filter((d) =>
-    d.bookAuthor.toLowerCase().includes(search) ||
-    d.bookName.toLowerCase().includes(search)
-  );
+  const filtered = data.filter((d) =>
+  (d.bookAuthor || "").toLowerCase().includes(search) ||
+  (d.bookName || "").toLowerCase().includes(search)
+);
 
   const handleGenreClick = (genre) => {
     navigate(`/allbooks?genre=${genre}`);
