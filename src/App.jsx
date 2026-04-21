@@ -14,7 +14,7 @@ function App() {
 
   const search = searchTerm?.toLowerCase() || "";
 
-  const filtered = data.filter((d) =>
+ const filtered = (data || []).filter((d) =>
   (d.bookAuthor || "").toLowerCase().includes(search) ||
   (d.bookName || "").toLowerCase().includes(search)
 );
