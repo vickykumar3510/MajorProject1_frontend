@@ -5,13 +5,13 @@ Built with a React frontend, Express/Node backend, MongoDB databases.
 
 ## Demo Link
 
-[Live Demo](https://major-project1-frontend.vercel.app/)
+[Live Demo](https://bookwala-app.vercel.app/)
 
 ## Quick Start
 
 ```
-git clone https://github.com/vickykumar3510/MajorProject1_frontend.git
-cd <MajorProject1_frontend>
+git clone https://github.com/vickykumar3510/bookwala_frontend.git
+cd <bookwala_frontend>
 npm install
 npm run dev
 ```
